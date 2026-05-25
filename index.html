@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zano 40 ans à l'Oktoberfest - site festif, carte Munich, lexique allemand/français et coffre-fort à énigmes." />
+  <title>Zano 40 ans à l'Oktoberfest</title>
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#accueil">Aller au contenu</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navigation principale">
+      <a href="#accueil" class="brand" aria-label="Accueil Zano Oktoberfest">
+        <span class="brand-mark">Z40</span>
+        <span>Zano Oktoberfest</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Ouvrir le menu</span>
+      </button>
+
+      <ul id="main-menu" class="nav-menu">
+        <li><a href="#squad">La Squad</a></li>
+        <li><a href="#map-section">Carte</a></li>
+        <li><a href="#lexique">Lexique</a></li>
+        <li><a href="#lieux">Munich secret</a></li>
+        <li><a href="#coffre">Coffre-fort</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="accueil">
+    <section class="hero section-panel">
+      <div class="hero-content">
+        <p class="eyebrow">Mission septembre · Munich · bière · énigmes · chaos maîtrisé</p>
+        <h1>Zano 40 ans<br><span>à l’Oktoberfest</span></h1>
+        <p class="hero-text">
+          Bienvenue dans le QG officiel de l’expédition. Une bande de personnages suspects,
+          une ville mythique, des phrases de survie en allemand et un coffre-fort qui protège
+          les secrets les plus dangereux de ZANO.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#coffre">Tenter le coffre</a>
+          <a class="btn ghost" href="#map-section">Voir la carte</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <figure class="hero-photo-frame" aria-label="Photo principale de l'évènement">
+          <img id="heroPhoto" src="assets/zano-photo.jpg" alt="Photo principale de ZANO et de la Squad" />
+          <figcaption>Photo officielle de la mission</figcaption>
+          <div class="photo-placeholder">
+            <strong>Emplacement photo</strong>
+            <span>Place ta photo ici : <code>assets/zano-photo.jpg</code></span>
+          </div>
+        </figure>
+
+        <div class="wanted-card" aria-label="Carte anniversaire Zano">
+          <span class="stamp">WANTED</span>
+          <h2>ZANO</h2>
+          <p>40 ans</p>
+          <strong>Chef de mission : Oktoberfest</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="infos" class="info-strip" aria-label="Informations rapides">
+      <article>
+        <strong>Dates officielles 2026</strong>
+        <span>19 septembre → 4 octobre</span>
+      </article>
+      <article>
+        <strong>Zone principale</strong>
+        <span>Theresienwiese, Munich</span>
+      </article>
+      <article>
+        <strong>Objectif</strong>
+        <span>Survivre à la Wiesn avec panache</span>
+      </article>
+    </section>
+
+    <section id="squad" class="section-panel">
+      <div class="section-title">
+        <p class="eyebrow">Distribution officielle</p>
+        <h2>La Squad de ZANO</h2>
+      </div>
+      <div class="squad-grid" id="squadGrid"></div>
+    </section>
+
+    <section id="map-section" class="section-panel">
+      <div class="section-title">
+        <p class="eyebrow">Terrain d’opérations</p>
+        <h2>Carte interactive de Munich</h2>
+      </div>
+      <div class="map-layout">
+        <div id="map" role="application" aria-label="Carte interactive de Munich"></div>
+        <aside class="map-notes">
+          <h3>Repères tactiques</h3>
+          <p>Clique sur les marqueurs pour afficher les lieux utiles : Oktoberfest, places mythiques, bars, jardins et spots photo.</p>
+          <ul id="mapList"></ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="lexique" class="section-panel">
+      <div class="section-title">
+        <p class="eyebrow">Allemand de survie</p>
+        <h2>Traducteur commando bière</h2>
+      </div>
+      <div class="toolbar lexique-toolbar">
+        <input id="phraseSearch" type="search" placeholder="Chercher : bière, drague, taxi, toilettes..." autocomplete="off" />
+        <div id="phraseFilters" class="filter-row" aria-label="Filtres du lexique"></div>
+      </div>
+      <div class="phrase-grid" id="phraseGrid"></div>
+    </section>
+
+    <section id="lieux" class="section-panel">
+      <div class="section-title">
+        <p class="eyebrow">Munich emblématique & planqué</p>
+        <h2>Lieux à explorer</h2>
+      </div>
+      <div class="filter-row" id="placeFilters" aria-label="Filtres des lieux"></div>
+      <div class="place-grid" id="placeGrid"></div>
+    </section>
+
+    <section id="coffre" class="section-panel vault-section">
+      <div class="section-title">
+        <p class="eyebrow">Zone classifiée</p>
+        <h2>Le coffre-fort des secrets de ZANO</h2>
+      </div>
+      <div class="vault">
+        <div class="vault-door" aria-hidden="true">
+          <div class="vault-wheel"></div>
+        </div>
+        <div class="vault-game">
+          <p>
+            Le coffre est maintenant un jeu de piste en 6 verrous. Chaque bonne réponse allume un fragment du code final.
+            Les accents, majuscules et espaces ne comptent pas : seul l’esprit ZANO compte.
+          </p>
+
+          <div class="vault-progress" id="vaultProgress" aria-label="Progression du coffre"></div>
+
+          <div id="riddleHost"></div>
+
+          <div class="final-code">
+            <h3>Code final</h3>
+            <p>Récupère les 6 fragments pour former le code final.</p>
+            <input id="vaultCode" type="text" placeholder="Code du coffre" autocomplete="off" />
+            <button id="openVault" class="btn primary" type="button">Ouvrir</button>
+            <p id="vaultResult" class="vault-result" aria-live="polite"></p>
+            <div id="secretLocation" class="secret-location" hidden>
+              <h3>Position du vrai secret de ZANO</h3>
+              <p class="classified-line">Celui qui connaît le vrai secret attend ici :</p>
+              <p><strong>43° 05' 59.528&quot; N · 005° 53' 20.666&quot; E</strong></p>
+              <p class="decimal-coords">Format décimal : 43.099869, 5.889074</p>
+              <a class="btn ghost" href="https://www.openstreetmap.org/?mlat=43.099869&mlon=5.889074#map=18/43.099869/5.889074" target="_blank" rel="noopener noreferrer">Ouvrir la position</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Zano 40 ans à l’Oktoberfest · Site privé festif · GitHub Pages ready</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

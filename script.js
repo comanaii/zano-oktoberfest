@@ -61,8 +61,8 @@ const phrases = [
 const riddles = [
   {
     title: "Verrou 1 — La constante du chaos",
-    question: "Donne-moi le 40ème chiffre de Pi après la virgule.",
-    answers: ["5"],
+    question: "Donne-moi le 40ème chiffre de Pi. Exemple attendu : 1",
+    answers: ["1"],
     hint: "Pas besoin de réciter toute l’histoire : un seul chiffre suffit.",
     fragment: "Z"
   },

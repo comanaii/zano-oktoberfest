@@ -345,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMenu();
   initMap();
   initVault();
+  initTributeSection();
 
   const heroPhoto = document.querySelector("#heroPhoto");
   if (heroPhoto) {
@@ -365,3 +366,187 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPhrases(document.querySelector("#phraseSearch").value);
   });
 });
+
+
+// ========================================
+// HOMMAGE ZANO — ACCÈS ET CARROUSEL
+// Mot de passe actuel : ZANO40
+// Pour le modifier, remplace uniquement l'empreinte SHA-256 ci-dessous.
+// Générateur possible : https://emn178.github.io/online-tools/sha256.html
+// ========================================
+const TRIBUTE_PASSWORD_HASH = "5c590a33769d9715dd52b75ce5d04e13066d6dcb89dc537edbd0443a7f1c9196";
+
+async function sha256(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function initTributeSection() {
+  const lock = document.querySelector("#tributeLock");
+  const content = document.querySelector("#tributeContent");
+  const form = document.querySelector("#tributePasswordForm");
+  const input = document.querySelector("#tributePassword");
+  const feedback = document.querySelector("#tributePasswordFeedback");
+  const lockButton = document.querySelector("#lockTribute");
+  if (!lock || !content || !form || !input || !feedback) return;
+
+  let currentSlide = 0;
+  let autoPlayId = null;
+  const slides = Array.from(document.querySelectorAll(".tribute-slide"));
+  const track = document.querySelector("#tributeTrack");
+  const dotsHost = document.querySelector("#tributeDots");
+
+  slides.forEach((slide, index) => {
+    const image = slide.querySelector("img");
+    const filename = image?.getAttribute("src")?.split("/").pop() || `zano-${String(index + 1).padStart(2, "0")}.jpg`;
+    slide.dataset.file = filename;
+    if (image) {
+      image.addEventListener("error", () => slide.classList.add("photo-missing"));
+    }
+  });
+
+  dotsHost.innerHTML = slides.map((_, index) =>
+    `<button class="tribute-dot ${index === 0 ? "active" : ""}" type="button" aria-label="Afficher la photo ${index + 1}" data-slide="${index}"></button>`
+  ).join("");
+
+ function showSlide(index) {
+    if (!slides.length) return;
+
+    currentSlide = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle(
+            "active",
+            slideIndex === currentSlide
+        );
+    });
+
+    if (dotsHost) {
+        dotsHost
+            .querySelectorAll(".tribute-dot")
+            .forEach((dot, dotIndex) => {
+                dot.classList.toggle(
+                    "active",
+                    dotIndex === currentSlide
+                );
+            });
+    }
+}
+
+  function stopAutoPlay() {
+    if (autoPlayId) window.clearInterval(autoPlayId);
+    autoPlayId = null;
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    autoPlayId = window.setInterval(() => showSlide(currentSlide + 1), 6500);
+  }
+
+  document.querySelector("#tributePrev")?.addEventListener("click", () => { showSlide(currentSlide - 1); startAutoPlay(); });
+  document.querySelector("#tributeNext")?.addEventListener("click", () => { showSlide(currentSlide + 1); startAutoPlay(); });
+  dotsHost.addEventListener("click", event => {
+    const dot = event.target.closest(".tribute-dot");
+    if (!dot) return;
+    showSlide(Number(dot.dataset.slide));
+    startAutoPlay();
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const candidate = input.value.trim().toUpperCase();
+    if (!candidate) return;
+
+    try {
+      const candidateHash = await sha256(candidate);
+      if (candidateHash === TRIBUTE_PASSWORD_HASH) {
+        lock.hidden = true;
+        content.hidden = false;
+        content.classList.add("revealed");
+        window.dispatchEvent(new Event("scroll"));
+        feedback.textContent = "";
+        input.value = "";
+        showSlide(0);
+        startAutoPlay();
+        content.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        feedback.textContent = "Mot de passe incorrect. Accès refusé à ce dossier.";
+        feedback.style.color = "var(--red)";
+        input.select();
+      }
+    } catch (error) {
+      feedback.textContent = "Le navigateur ne permet pas la vérification sécurisée du mot de passe.";
+      feedback.style.color = "var(--red)";
+    }
+  });
+
+  lockButton?.addEventListener("click", () => {
+    stopAutoPlay();
+    content.hidden = true;
+    content.classList.remove("revealed");
+    lock.hidden = false;
+    input.focus();
+    lock.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAutoPlay();
+    else if (!content.hidden) startAutoPlay();
+  });
+}
+/* =========================================================
+   APPARITION PROGRESSIVE DU TEXTE HOMMAGE
+   ========================================================= */
+
+function initZanoTributeText() {
+    const tribute = document.getElementById("zanoTribute");
+
+    if (!tribute) {
+        return;
+    }
+
+    const paragraphs = tribute.querySelectorAll(
+        ".zano-tribute-paragraph"
+    );
+
+    if (!paragraphs.length) {
+        return;
+    }
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+        paragraphs.forEach((paragraph) => {
+            paragraph.classList.add("is-visible");
+        });
+
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        (entries, currentObserver) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                entry.target.classList.add("is-visible");
+                currentObserver.unobserve(entry.target);
+            });
+        },
+        {
+            threshold: 0.18,
+            rootMargin: "0px 0px -8% 0px"
+        }
+    );
+
+    paragraphs.forEach((paragraph) => {
+        observer.observe(paragraph);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", initZanoTributeText);

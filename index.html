@@ -30,6 +30,7 @@
         <li><a href="#lexique">Lexique</a></li>
         <li><a href="#lieux">Munich secret</a></li>
         <li><a href="#coffre">Coffre-fort</a></li>
+        <li><a href="#hommage-zano">Hommage</a></li>
       </ul>
     </nav>
   </header>
@@ -163,6 +164,155 @@
         </div>
       </div>
     </section>
+
+    <section id="hommage-zano" class="section-panel tribute-section">
+      <div class="section-title">
+        <p class="eyebrow">Dossier confidentiel · Mémoire d’un marin</p>
+        <h2>Zano, la fin d’un corsaire</h2>
+      </div>
+
+      <div id="tributeLock" class="tribute-lock">
+        <div class="tribute-lock-icon" aria-hidden="true">⚓</div>
+        <div>
+          <h3>Accès réservé à l’équipage</h3>
+          <p>Cette section rend hommage au parcours de Zano dans la Marine nationale.</p>
+          <form id="tributePasswordForm" class="tribute-password-form">
+            <label for="tributePassword">Mot de passe</label>
+            <div class="password-line">
+              <input id="tributePassword" type="password" autocomplete="current-password" placeholder="Entrez le mot de passe" required />
+              <button class="btn primary" type="submit">Déverrouiller</button>
+            </div>
+            <p id="tributePasswordFeedback" class="password-feedback" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+
+      <div id="tributeContent" class="tribute-content" hidden>
+        <div class="tribute-banner">
+          <span>Honneur · Fidélité · Fraternité</span>
+          <button id="lockTribute" class="btn ghost small" type="button">Verrouiller</button>
+        </div>
+
+        <div class="tribute-carousel" aria-label="Carrousel des souvenirs de Zano">
+          <button id="tributePrev" class="tribute-carousel-btn prev" type="button" aria-label="Photo précédente">‹</button>
+          <div class="tribute-carousel-viewport">
+            <div id="tributeTrack" class="tribute-carousel-track">
+              <figure class="tribute-slide active">
+                <img src="assets/hommage/zano-00.jpg" alt="Zano au cours de sa carrière dans la Marine nationale" loading="lazy" />
+                <figcaption>Corsair du bout du Monde</figcaption>
+              </figure>
+                <figure class="tribute-slide active">
+                <img src="assets/hommage/zano-01.jpg" alt="Zano au cours de sa carrière dans la Marine nationale" loading="lazy" />
+                <figcaption>Les vilains sont de sortie</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-02.jpg" alt="Souvenir d’équipage avec Zano" loading="lazy" />
+                <figcaption>Le commencement</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-03.jpg" alt="Zano pendant une mission" loading="lazy" />
+                <figcaption>Attaque surprise chez Bertrand.</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-04.jpg" alt="Zano entouré de ses camarades" loading="lazy" />
+                <figcaption>Suicid Squad</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-05.jpg" alt="Portrait de Zano en tenue" loading="lazy" />
+                <figcaption>Zano au pique-nique.</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-06.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Zano ramène la coupe à la maison.</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-07.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Début d'une soirée à base de rhum.</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-08.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Zano sur la moto, la tête dans les nuages..</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-09.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Suicid Squad</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-10.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Zano gagne à la boxe.</figcaption>
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-11.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Zano face à lui-même.</figcaption>  
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-12.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Souvenir d'antan.</figcaption>  
+              </figure>
+              <figure class="tribute-slide">
+                <img src="assets/hommage/zano-13.jpg" alt="Dernier souvenir de la carrière de Zano" loading="lazy" />
+                <figcaption>Souvenir d'antan.</figcaption>  
+              </figure>
+            </div>
+          </div>
+          <button id="tributeNext" class="tribute-carousel-btn next" type="button" aria-label="Photo suivante">›</button>
+          <div id="tributeDots" class="tribute-dots" aria-label="Choisir une photo"></div>
+        </div>
+
+        <article id="zanoTribute" class="zano-tribute" aria-labelledby="zanoTributeTitle">
+        <header class="zano-tribute-header">
+          <p class="zano-tribute-eyebrow">Dernier chapitre</p>
+          <h3 id="zanoTributeTitle">Zano, la fin d’un corsaire</h3>
+          <div class="zano-tribute-separator" aria-hidden="true"></div>
+        </header>
+
+        <div class="zano-tribute-content">
+          <p class="zano-tribute-paragraph">
+            Dans ce monde, beaucoup d’hommes passent sans laisser de trace. Le temps efface leurs pas, puis leur nom. Zano n’est pas de ceux-là. Partout où il a navigué, il a laissé des souvenirs, des amitiés et quelques dégâts que même les dieux préféreraient ne pas avoir à expliquer. Ce texte n’est donc pas un simple message de départ. C’est l’hommage rendu à un corsaire qui a vécu pleinement, sans jamais faire semblant.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Il a parcouru le monde avec son grain de folie, sa loyauté et ce vieux sens de la camaraderie que l’on croyait réservé aux légendes. Il a guidé, formé et influencé bien des âmes égarées. Ont-elles trouvé la lumière grâce à lui ? Rien n’est moins sûr. Certaines se sont même probablement égarées davantage. Mais aucune ne l’a oublié.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Zano savait transformer une soirée ordinaire en épopée. Son appétit était gargantuesque, sa soif digne d’un banquet de l’Olympe et ses idées rarement compatibles avec la dignité humaine. Il nous a appris à lever nos verres, à rire de nous-mêmes et à profiter de ceux qui partageaient notre route. Avec lui, personne ne savait comment la soirée finirait. On savait seulement qu’elle finirait tard, probablement mal, et qu’elle deviendrait un récit transmis pendant des années.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Mais derrière le pirate se trouvait un homme sur lequel on pouvait compter. Un véritable compagnon de fortune. De ceux qui restent lorsque le vent tourne, lorsque la mer se lève et lorsque les autres commencent à douter. Il savait écouter, soutenir et tendre la main sans rien attendre en retour. Il a créé autour de lui une famille plus grande que celle du sang. Là se trouve peut-être sa véritable légende : avoir donné aux autres la force d’avancer et la certitude qu’ils ne navigueraient jamais seuls.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Même les héros ont pourtant leurs faiblesses. Achille avait son talon. Zano possède Sabrina, qui connaît probablement la liste complète. Il peut rester allongé si longtemps que l’on finit par vérifier discrètement s’il appartient encore au monde des vivants. Il peut faire disparaître une boîte de gâteaux avant même que les autres aient découvert son existence. Quant aux odeurs qu’il est capable de libérer, elles auraient probablement contraint Poséidon lui-même à abandonner son trident et à évacuer les lieux. Enfin, lorsqu’il propose un café, la prudence impose de demander ce qu’il contient avant d’accepter son destin.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Pourtant, nous ne voudrions rien changer. Ses excès, ses défauts et ses folies font partie de l’homme que nous avons appris à aimer. Ils sont les marques d’une vie vécue sans retenue, avec générosité, passion et parfois un mépris admirable pour toute forme de sagesse.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            De la part des marins qui ont croisé ta route, de ta famille et des Rattels de la Planif, nous te souhaitons de poursuivre ton voyage vers des rivages plus calmes, mais jamais trop sages. Que les vents te soient favorables. Que les dieux de la mer gardent un œil sur toi. Et surtout, qu’ils gardent une distance raisonnable lorsque tu prépares le café.
+          </p>
+
+          <p class="zano-tribute-paragraph">
+            Ce départ n’est pas la fin de ton histoire. C’est une nouvelle traversée. Les équipages se séparent, les navires changent de cap et les années emportent bien des choses. Mais certains hommes échappent à l’oubli, parce qu’ils continuent de vivre dans les histoires, les rires et le cœur de ceux qui ont navigué avec eux.
+          </p>
+
+          <p class="zano-tribute-paragraph zano-tribute-conclusion">
+            Zano, tu n’as pas seulement laissé un sillage.<br>
+            Tu es devenu une légende que nous continuerons de raconter.
+          </p>
+        </div>
+
+        <footer class="zano-tribute-footer">
+          <p>À Zano.</p>
+          <p>De la part de ta famille, des marins et des Rattels de la Planif.</p>
+        </footer>
+      </article>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">

@@ -550,3 +550,751 @@ function initZanoTributeText() {
 }
 
 document.addEventListener("DOMContentLoaded", initZanoTributeText);
+
+/* =========================================================
+   SUICID SQUAD OPS
+   ========================================================= */
+
+function initSuicidSquadOps() {
+
+    const rallyStorageKey = "suicidSquadRallyPoint";
+
+    const HOTEL_DESTINATION =
+        "Landsberger Straße 338, Laim, 80687 München, Deutschland";
+
+    const OKTOBERFEST_DESTINATION =
+        "Theresienwiese, München, Germany";
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const saveRallyButton =
+        document.getElementById("saveRallyPoint");
+
+    const goRallyButton =
+        document.getElementById("goRallyPoint");
+
+    const lostButton =
+        document.getElementById("lostButton");
+
+    const translatorButton =
+        document.getElementById("translatorButton");
+
+    const rallyStatus =
+        document.getElementById("rallyStatus");
+
+    const lostDialog =
+        document.getElementById("lostDialog");
+
+    const translatorDialog =
+        document.getElementById("translatorDialog");
+
+    const currentPosition =
+        document.getElementById("currentPosition");
+
+    const lostFeedback =
+        document.getElementById("lostFeedback");
+
+
+    /* =====================================================
+       GPS
+       ===================================================== */
+
+    function getCurrentPosition() {
+
+        return new Promise((resolve, reject) => {
+
+            if (!navigator.geolocation) {
+
+                reject(
+                    new Error(
+                        "La géolocalisation n'est pas disponible."
+                    )
+                );
+
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                position => {
+
+                    resolve({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
+
+                },
+                error => {
+
+                    reject(error);
+
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 12000,
+                    maximumAge: 30000
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       GOOGLE MAPS
+       ===================================================== */
+
+    function openDirections(destination) {
+
+        const url =
+            "https://www.google.com/maps/dir/?api=1" +
+            "&destination=" +
+            encodeURIComponent(destination) +
+            "&travelmode=walking";
+
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+    }
+
+
+    function openCoordinates(lat, lng) {
+
+        const url =
+            "https://www.google.com/maps/search/?api=1" +
+            "&query=" +
+            encodeURIComponent(`${lat},${lng}`);
+
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+    }
+
+
+    /* =====================================================
+       POINT DE RALLIEMENT
+       ===================================================== */
+
+    function readRallyPoint() {
+
+        try {
+
+            const value =
+                localStorage.getItem(rallyStorageKey);
+
+            return value
+                ? JSON.parse(value)
+                : null;
+
+        } catch {
+
+            return null;
+
+        }
+
+    }
+
+
+    function updateRallyStatus() {
+
+        const rally = readRallyPoint();
+
+        if (!rally) {
+
+            rallyStatus.textContent =
+                "Aucun point de ralliement enregistré.";
+
+            return;
+
+        }
+
+        const date =
+            new Date(rally.createdAt);
+
+        rallyStatus.textContent =
+            `Point de ralliement enregistré à ` +
+            `${date.toLocaleTimeString("fr-FR", {
+                hour: "2-digit",
+                minute: "2-digit"
+            })}.`;
+
+    }
+
+
+    saveRallyButton?.addEventListener(
+        "click",
+        async () => {
+
+            rallyStatus.textContent =
+                "Localisation en cours...";
+
+            try {
+
+                const position =
+                    await getCurrentPosition();
+
+                const rally = {
+                    lat: position.lat,
+                    lng: position.lng,
+                    createdAt: new Date().toISOString()
+                };
+
+                localStorage.setItem(
+                    rallyStorageKey,
+                    JSON.stringify(rally)
+                );
+
+                updateRallyStatus();
+
+            } catch {
+
+                rallyStatus.textContent =
+                    "Impossible d'obtenir la position GPS.";
+
+            }
+
+        }
+    );
+
+
+    function goToRallyPoint() {
+
+        const rally = readRallyPoint();
+
+        if (!rally) {
+
+            rallyStatus.textContent =
+                "Aucun point de ralliement n'a encore été défini.";
+
+            return;
+
+        }
+
+        openDirections(
+            `${rally.lat},${rally.lng}`
+        );
+
+    }
+
+
+    goRallyButton?.addEventListener(
+        "click",
+        goToRallyPoint
+    );
+
+
+    /* =====================================================
+       MODE : ON EST PERDU
+       ===================================================== */
+
+    let lastKnownPosition = null;
+
+
+    lostButton?.addEventListener(
+        "click",
+        async () => {
+
+            lostDialog?.showModal();
+
+            currentPosition.textContent =
+                "Recherche GPS...";
+
+            lostFeedback.textContent = "";
+
+            try {
+
+                lastKnownPosition =
+                    await getCurrentPosition();
+
+                currentPosition.textContent =
+                    `${lastKnownPosition.lat.toFixed(6)}, ` +
+                    `${lastKnownPosition.lng.toFixed(6)}`;
+
+            } catch {
+
+                currentPosition.textContent =
+                    "Position GPS indisponible.";
+
+            }
+
+        }
+    );
+
+
+    document
+        .getElementById("openCurrentPosition")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                if (!lastKnownPosition) {
+                    return;
+                }
+
+                openCoordinates(
+                    lastKnownPosition.lat,
+                    lastKnownPosition.lng
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById("goHotel")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                openDirections(
+                    HOTEL_DESTINATION
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById("lostGoRally")
+        ?.addEventListener(
+            "click",
+            goToRallyPoint
+        );
+
+
+    document
+        .getElementById("goOktoberfest")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                openDirections(
+                    OKTOBERFEST_DESTINATION
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById("sharePosition")
+        ?.addEventListener(
+            "click",
+            async () => {
+
+                if (!lastKnownPosition) {
+
+                    lostFeedback.textContent =
+                        "Position GPS indisponible.";
+
+                    return;
+
+                }
+
+                const mapsUrl =
+                    "https://www.google.com/maps/search/?api=1&query=" +
+                    encodeURIComponent(
+                        `${lastKnownPosition.lat},${lastKnownPosition.lng}`
+                    );
+
+                const text =
+                    `Ma position : ${mapsUrl}`;
+
+                try {
+
+                    if (navigator.share) {
+
+                        await navigator.share({
+                            title: "Position Suicid Squad",
+                            text
+                        });
+
+                    } else {
+
+                        await navigator.clipboard.writeText(
+                            text
+                        );
+
+                        lostFeedback.textContent =
+                            "Position copiée dans le presse-papiers.";
+
+                    }
+
+                } catch {
+
+                    lostFeedback.textContent =
+                        "Impossible de partager la position.";
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       TRADUCTEUR AUDIO
+       Les fichiers MP3 sont embarqués dans assets/audio.
+       Aucune voix système n'est nécessaire.
+       ===================================================== */
+
+    const phrases = {
+
+        "🍺 Bière": [
+            {
+                de: "Noch ein Bier, bitte!",
+                fr: "Encore une bière, s'il vous plaît !",
+                audio: "assets/audio/bier-01.mp3"
+            },
+            {
+                de: "Prost!",
+                fr: "Santé !",
+                audio: "assets/audio/bier-02.mp3"
+            },
+            {
+                de: "Zwei Bier, bitte.",
+                fr: "Deux bières, s'il vous plaît.",
+                audio: "assets/audio/bier-03.mp3"
+            }
+        ],
+
+        "🍖 Manger": [
+            {
+                de: "Wir möchten etwas essen.",
+                fr: "Nous voudrions manger quelque chose.",
+                audio: "assets/audio/manger-01.mp3"
+            },
+            {
+                de: "Was empfehlen Sie?",
+                fr: "Que recommandez-vous ?",
+                audio: "assets/audio/manger-02.mp3"
+            },
+            {
+                de: "Die Rechnung, bitte.",
+                fr: "L'addition, s'il vous plaît.",
+                audio: "assets/audio/manger-03.mp3"
+            }
+        ],
+
+        "🚕 Taxi": [
+            {
+                de: "Wir brauchen ein Taxi.",
+                fr: "Nous avons besoin d'un taxi.",
+                audio: "assets/audio/taxi-01.mp3"
+            },
+            {
+                de: "Können Sie uns hierhin bringen?",
+                fr: "Pouvez-vous nous conduire ici ?",
+                audio: "assets/audio/taxi-02.mp3"
+            }
+        ],
+
+        "🏨 Hôtel": [
+            {
+                de: "Wo ist unser Hotel?",
+                fr: "Où est notre hôtel ?",
+                audio: "assets/audio/hotel-01.mp3"
+            },
+            {
+                de: "Wir haben eine Reservierung.",
+                fr: "Nous avons une réservation.",
+                audio: "assets/audio/hotel-02.mp3"
+            }
+        ],
+
+        "❤️ Drague": [
+            {
+                de: "Darf ich dir etwas zu trinken anbieten?",
+                fr: "Je peux t'offrir un verre ?",
+                audio: "assets/audio/drague-01.mp3"
+            },
+            {
+                de: "Wie heißt du?",
+                fr: "Comment t'appelles-tu ?",
+                audio: "assets/audio/drague-02.mp3"
+            },
+            {
+                de: "Du bist sehr sympathisch.",
+                fr: "Tu es très sympathique.",
+                audio: "assets/audio/drague-03.mp3"
+            }
+        ],
+
+        "🚨 Urgence": [
+            {
+                de: "Wir brauchen Hilfe.",
+                fr: "Nous avons besoin d'aide.",
+                audio: "assets/audio/urgence-01.mp3"
+            },
+            {
+                de: "Rufen Sie bitte die Polizei.",
+                fr: "Appelez la police, s'il vous plaît.",
+                audio: "assets/audio/urgence-02.mp3"
+            },
+            {
+                de: "Rufen Sie bitte einen Krankenwagen.",
+                fr: "Appelez une ambulance, s'il vous plaît.",
+                audio: "assets/audio/urgence-03.mp3"
+            }
+        ]
+
+    };
+
+
+    const categoriesHost =
+        document.getElementById("phraseCategories");
+
+    const phraseList =
+        document.getElementById("phraseList");
+
+    let activeGermanAudio = null;
+
+
+    function playGermanAudio(audioFile, button) {
+
+        if (!audioFile) {
+            return;
+        }
+
+        if (activeGermanAudio) {
+            activeGermanAudio.pause();
+            activeGermanAudio.currentTime = 0;
+        }
+
+        const audio =
+            new Audio(audioFile);
+
+        activeGermanAudio = audio;
+
+        const originalText =
+            button?.textContent || "🔊 ÉCOUTER";
+
+        if (button) {
+            button.disabled = true;
+            button.textContent = "🔊 LECTURE...";
+        }
+
+        const resetButton = () => {
+
+            if (button) {
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+
+            if (activeGermanAudio === audio) {
+                activeGermanAudio = null;
+            }
+
+        };
+
+        audio.addEventListener(
+            "ended",
+            resetButton,
+            { once: true }
+        );
+
+        audio.addEventListener(
+            "error",
+            () => {
+
+                resetButton();
+
+                if (button) {
+                    button.textContent = "⚠ AUDIO INTROUVABLE";
+
+                    window.setTimeout(
+                        () => {
+                            button.textContent = originalText;
+                        },
+                        1800
+                    );
+                }
+
+            },
+            { once: true }
+        );
+
+        audio.play().catch(() => {
+            resetButton();
+        });
+
+    }
+
+
+    function showPhraseCategory(category) {
+
+        phraseList.replaceChildren();
+
+        const selectedPhrases =
+            phrases[category];
+
+        selectedPhrases.forEach(item => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "phrase-card";
+
+
+            const german =
+                document.createElement("span");
+
+            german.className =
+                "phrase-german";
+
+            german.textContent =
+                item.de;
+
+
+            const french =
+                document.createElement("span");
+
+            french.className =
+                "phrase-french";
+
+            french.textContent =
+                item.fr;
+
+
+            const speakButton =
+                document.createElement("button");
+
+            speakButton.type =
+                "button";
+
+            speakButton.className =
+                "speak-phrase";
+
+            speakButton.textContent =
+                "🔊 ÉCOUTER";
+
+
+            speakButton.addEventListener(
+                "click",
+                () => playGermanAudio(item.audio, speakButton)
+            );
+
+
+            card.append(
+                german,
+                french,
+                speakButton
+            );
+
+            phraseList.append(card);
+
+        });
+
+
+        categoriesHost
+            .querySelectorAll(
+                ".phrase-category"
+            )
+            .forEach(button => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.category === category
+                );
+
+            });
+
+    }
+
+
+    if (categoriesHost) {
+
+        Object.keys(phrases).forEach(
+            (category, index) => {
+
+                const button =
+                    document.createElement("button");
+
+                button.type =
+                    "button";
+
+                button.className =
+                    "phrase-category";
+
+                button.dataset.category =
+                    category;
+
+                button.textContent =
+                    category;
+
+                button.addEventListener(
+                    "click",
+                    () => showPhraseCategory(category)
+                );
+
+                categoriesHost.append(button);
+
+                if (index === 0) {
+                    button.classList.add("active");
+                }
+
+            }
+        );
+
+        showPhraseCategory(
+            Object.keys(phrases)[0]
+        );
+
+    }
+
+
+    translatorButton?.addEventListener(
+        "click",
+        () => {
+
+            translatorDialog?.showModal();
+
+        }
+    );
+
+
+    /* =====================================================
+       FERMETURE DES DIALOGUES
+       ===================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-close-dialog]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const dialog =
+                        document.getElementById(
+                            button.dataset.closeDialog
+                        );
+
+                    dialog?.close();
+
+                }
+            );
+
+        });
+
+
+    updateRallyStatus();
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initSuicidSquadOps
+);

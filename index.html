@@ -30,6 +30,7 @@
         <li><a href="#lexique">Lexique</a></li>
         <li><a href="#lieux">Munich secret</a></li>
         <li><a href="#coffre">Coffre-fort</a></li>
+        <li><a href="#squad-ops">SUICID SQUAD OPS</a></li>
         <li><a href="#hommage-zano">Hommage</a></li>
       </ul>
     </nav>
@@ -164,6 +165,289 @@
         </div>
       </div>
     </section>
+
+    <section id="squad-ops" class="squad-ops">
+    <div class="ops-shell">
+
+        <header class="ops-header">
+            <span class="ops-classified">
+                MUNICH // OPERATION ACTIVE
+            </span>
+
+            <h2>SUICID SQUAD OPS</h2>
+
+            <p>
+                Navigation, ralliement et survie linguistique.
+                Si vous lisez ceci après plusieurs bières,
+                utilisez les gros boutons.
+            </p>
+        </header>
+
+
+        <div class="ops-grid">
+
+            <!-- POINT DE RALLIEMENT -->
+            <button
+                id="saveRallyPoint"
+                class="ops-action"
+                type="button"
+            >
+                <span class="ops-icon">
+                    📍
+                </span>
+
+                <span class="ops-action-title">
+                    POINT DE RALLIEMENT
+                </span>
+
+                <span class="ops-action-text">
+                    Enregistrer notre position actuelle
+                </span>
+            </button>
+
+
+            <!-- REJOINDRE LE GROUPE -->
+            <button
+                id="goRallyPoint"
+                class="ops-action"
+                type="button"
+            >
+                <span class="ops-icon">
+                    🧭
+                </span>
+
+                <span class="ops-action-title">
+                    REJOINDRE L'ÉQUIPE
+                </span>
+
+                <span class="ops-action-text">
+                    Itinéraire vers le dernier ralliement
+                </span>
+            </button>
+
+
+            <!-- MODE PERDU -->
+            <button
+                id="lostButton"
+                class="ops-action ops-action-danger"
+                type="button"
+            >
+                <span class="ops-icon">
+                    🚨
+                </span>
+
+                <span class="ops-action-title">
+                    ON EST PERDU
+                </span>
+
+                <span class="ops-action-text">
+                    Procédure de récupération immédiate
+                </span>
+            </button>
+
+
+            <!-- TRADUCTEUR -->
+            <button
+                id="translatorButton"
+                class="ops-action"
+                type="button"
+            >
+                <span class="ops-icon">
+                    🇩🇪
+                </span>
+
+                <span class="ops-action-title">
+                    SURVIE ALLEMANDE
+                </span>
+
+                <span class="ops-action-text">
+                    Parler même quand votre allemand est mort
+                </span>
+            </button>
+
+        </div>
+
+
+        <!-- STATUT DU POINT DE RALLIEMENT -->
+        <div
+            id="rallyStatus"
+            class="ops-status"
+            aria-live="polite"
+        >
+            Aucun point de ralliement enregistré.
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ======================================================
+     MODE : ON EST PERDU
+     ====================================================== -->
+
+<dialog
+    id="lostDialog"
+    class="ops-dialog"
+>
+
+    <div class="dialog-header">
+
+        <div>
+            <span class="ops-classified">
+                PROCEDURE D'URGENCE
+            </span>
+
+            <h2>
+                🚨 ON EST PERDU
+            </h2>
+        </div>
+
+
+        <button
+            class="dialog-close"
+            type="button"
+            data-close-dialog="lostDialog"
+            aria-label="Fermer"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <p class="lost-message">
+        Pas de panique. Enfin... pas tout de suite.
+    </p>
+
+
+    <!-- POSITION GPS -->
+    <div class="position-card">
+
+        <span>
+            POSITION ACTUELLE
+        </span>
+
+        <strong id="currentPosition">
+            Recherche GPS...
+        </strong>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+    <div class="lost-actions">
+
+        <button
+            id="openCurrentPosition"
+            type="button"
+        >
+            📍 Voir ma position
+        </button>
+
+
+        <button
+            id="goHotel"
+            type="button"
+        >
+            🏨 Retour hôtel
+        </button>
+
+
+        <button
+            id="lostGoRally"
+            type="button"
+        >
+            🧭 Point de ralliement
+        </button>
+
+
+        <button
+            id="goOktoberfest"
+            type="button"
+        >
+            🍺 Oktoberfest
+        </button>
+
+
+        <button
+            id="sharePosition"
+            type="button"
+        >
+            📤 Partager ma position
+        </button>
+
+    </div>
+
+
+    <p
+        id="lostFeedback"
+        class="dialog-feedback"
+        aria-live="polite"
+    ></p>
+
+</dialog>
+
+
+
+<!-- ======================================================
+     TRADUCTEUR DE SURVIE
+     ====================================================== -->
+
+<dialog
+    id="translatorDialog"
+    class="ops-dialog translator-dialog"
+>
+
+    <div class="dialog-header">
+
+        <div>
+            <span class="ops-classified">
+                DEUTSCH ÜBERLEBEN
+            </span>
+
+            <h2>
+                🇩🇪 Survie allemande
+            </h2>
+        </div>
+
+
+        <button
+            class="dialog-close"
+            type="button"
+            data-close-dialog="translatorDialog"
+            aria-label="Fermer"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         CATEGORIES
+         ================================================== -->
+
+    <div
+        id="phraseCategories"
+        class="phrase-categories"
+        aria-label="Catégories de phrases"
+    ></div>
+
+
+
+    <!-- ==================================================
+         LISTE DES PHRASES
+         ================================================== -->
+
+    <div
+        id="phraseList"
+        class="phrase-list"
+        aria-live="polite"
+    ></div>
+
+</dialog>
 
     <section id="hommage-zano" class="section-panel tribute-section">
       <div class="section-title">
@@ -304,7 +588,7 @@
             Tu es devenu une légende que nous continuerons de raconter.
           </p>
         </div>
-
+        
         <footer class="zano-tribute-footer">
           <p>À Zano.</p>
           <p>De la part de ta famille, des marins et des Rattels de la Planif.</p>

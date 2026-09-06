@@ -1409,3 +1409,418 @@ main,
         transition: none;
     }
 }
+
+/* =========================================================
+   SUICID SQUAD OPS
+   ========================================================= */
+
+.squad-ops {
+    padding: 60px 16px;
+}
+
+.ops-shell {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: clamp(22px, 4vw, 40px);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 12, 15, 0.97),
+            rgba(26, 20, 22, 0.97)
+        );
+
+    border: 1px solid rgba(255, 213, 0, 0.3);
+    border-radius: 24px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        inset 0 0 50px rgba(255, 255, 255, 0.02);
+}
+
+.ops-header {
+    margin-bottom: 30px;
+}
+
+.ops-classified {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #ffd500;
+
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+}
+
+.ops-header h2,
+.dialog-header h2 {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1;
+}
+
+.ops-header p {
+    max-width: 700px;
+    margin-top: 14px;
+
+    color: #bfbfc5;
+    line-height: 1.6;
+}
+
+
+/* BOUTONS */
+
+.ops-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.ops-action {
+    min-height: 155px;
+    padding: 22px;
+
+    cursor: pointer;
+
+    text-align: left;
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(35, 35, 40, 0.96),
+            rgba(18, 18, 21, 0.96)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.ops-action:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(255, 213, 0, 0.6);
+
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.ops-action-danger {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(160, 0, 18, 0.92),
+            rgba(70, 0, 12, 0.96)
+        );
+}
+
+.ops-action-danger:hover {
+    border-color: #ff344d;
+
+    box-shadow:
+        0 15px 35px rgba(180, 0, 20, 0.25);
+}
+
+.ops-icon {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 2rem;
+}
+
+.ops-action-title {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+}
+
+.ops-action-text {
+    display: block;
+
+    color: #aeb0b7;
+
+    font-size: 0.86rem;
+    line-height: 1.4;
+}
+
+.ops-action-danger .ops-action-text {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+/* STATUT RALLIEMENT */
+
+.ops-status {
+    margin-top: 18px;
+    padding: 14px 18px;
+
+    color: #d2d2d7;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border-left: 3px solid #ffd500;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   DIALOGUES
+   ========================================================= */
+
+.ops-dialog {
+    width: min(620px, calc(100% - 24px));
+    max-height: 88vh;
+    padding: 0;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #18181d,
+            #09090b
+        );
+
+    border: 1px solid rgba(255, 213, 0, 0.4);
+    border-radius: 20px;
+
+    box-shadow:
+        0 40px 100px rgba(0, 0, 0, 0.75);
+
+    overflow-y: auto;
+}
+
+.ops-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 24px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dialog-header h2 {
+    font-size: clamp(1.7rem, 6vw, 2.7rem);
+}
+
+.dialog-close {
+    width: 42px;
+    height: 42px;
+
+    cursor: pointer;
+
+    color: white;
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 0;
+    border-radius: 50%;
+
+    font-size: 1.8rem;
+}
+
+
+/* MODE PERDU */
+
+.lost-message {
+    padding: 0 24px;
+    margin: 22px 0;
+
+    color: #c6c6ca;
+}
+
+.position-card {
+    margin: 20px 24px;
+    padding: 20px;
+
+    background: rgba(255, 213, 0, 0.06);
+
+    border: 1px solid rgba(255, 213, 0, 0.25);
+    border-radius: 14px;
+}
+
+.position-card span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ffd500;
+
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.position-card strong {
+    display: block;
+
+    color: white;
+
+    font-size: 1.05rem;
+}
+
+.lost-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    padding: 0 24px 24px;
+}
+
+.lost-actions button {
+    min-height: 64px;
+    padding: 12px;
+
+    cursor: pointer;
+
+    color: white;
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+
+    font-weight: 700;
+}
+
+.lost-actions button:hover {
+    border-color: #ffd500;
+}
+
+.dialog-feedback {
+    padding: 0 24px 24px;
+
+    color: #ffd500;
+}
+
+
+/* =========================================================
+   TRADUCTEUR
+   ========================================================= */
+
+.phrase-categories {
+    display: flex;
+    gap: 8px;
+
+    padding: 20px;
+
+    overflow-x: auto;
+}
+
+.phrase-category {
+    flex: 0 0 auto;
+
+    padding: 10px 14px;
+
+    cursor: pointer;
+
+    color: white;
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+}
+
+.phrase-category.active {
+    color: #111;
+    background: #ffd500;
+    border-color: #ffd500;
+
+    font-weight: 800;
+}
+
+.phrase-list {
+    padding: 0 20px 24px;
+}
+
+.phrase-card {
+    margin-bottom: 10px;
+    padding: 16px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.phrase-german {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: white;
+
+    font-size: 1.08rem;
+    font-weight: 800;
+}
+
+.phrase-french {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #9fa0a7;
+
+    font-size: 0.88rem;
+}
+
+.speak-phrase {
+    padding: 9px 14px;
+
+    cursor: pointer;
+
+    color: #111;
+    background: #ffd500;
+
+    border: 0;
+    border-radius: 8px;
+
+    font-weight: 900;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .squad-ops {
+        padding: 35px 10px;
+    }
+
+    .ops-shell {
+        padding: 20px 14px;
+        border-radius: 18px;
+    }
+
+    .ops-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ops-action {
+        min-height: 120px;
+    }
+
+    .lost-actions {
+        grid-template-columns: 1fr;
+    }
+}

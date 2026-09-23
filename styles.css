@@ -1824,3 +1824,192 @@ main,
         grid-template-columns: 1fr;
     }
 }
+
+
+/* =========================================================
+   CARTE ENRICHIE — FKK / NATURISME / NIGHTLIFE
+   ========================================================= */
+
+.map-warning {
+  margin-top: .8rem;
+  padding: .85rem 1rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .05);
+  border-left: 3px solid var(--beer);
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+.place-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.place-card-head h3 {
+  margin-bottom: .3rem;
+}
+
+.place-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .45rem;
+  flex: 0 0 auto;
+}
+
+.rating-badge,
+.adult-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .38rem .58rem;
+  border-radius: 999px;
+  font-size: .76rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.rating-badge {
+  color: #111;
+  background: var(--beer);
+}
+
+.adult-badge {
+  color: #fff;
+  background: var(--red);
+}
+
+.adult-place {
+  border-color: rgba(255, 45, 149, .3);
+}
+
+.place-address {
+  margin: .8rem 0 .45rem;
+  color: var(--cyan);
+  font-size: .92rem;
+}
+
+.place-verified {
+  margin-top: .8rem;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.place-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: 1rem;
+}
+
+.place-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: .62rem .82rem;
+  color: var(--text);
+  text-decoration: none;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: .84rem;
+  font-weight: 800;
+}
+
+.place-link:hover,
+.place-link:focus-visible {
+  border-color: var(--beer);
+  transform: translateY(-1px);
+}
+
+.place-link.primary {
+  color: #111;
+  background: var(--acid);
+  border-color: transparent;
+}
+
+.custom-place-icon {
+  background: transparent;
+  border: 0;
+}
+
+.map-marker {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: var(--marker-color, var(--beer));
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,.45);
+}
+
+.map-marker::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  margin: 6px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.map-popup {
+  min-width: 220px;
+  color: #1d1722;
+  line-height: 1.4;
+}
+
+.map-popup > strong {
+  display: block;
+  margin-bottom: .25rem;
+  font-size: 1rem;
+}
+
+.map-popup-type {
+  display: inline-block;
+  margin-bottom: .45rem;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.map-popup-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin: .35rem 0 .5rem;
+}
+
+.map-popup .place-actions {
+  margin-top: .7rem;
+}
+
+.map-popup .place-link {
+  color: #111;
+  background: #f1f1f1;
+  border-color: #ddd;
+}
+
+.map-popup .place-link.primary {
+  background: #c9ff00;
+}
+
+@media (max-width: 560px) {
+  .place-card-head {
+    display: block;
+  }
+
+  .place-badges {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: .65rem;
+  }
+
+  .place-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

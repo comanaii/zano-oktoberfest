@@ -13,7 +13,18 @@ const squad = [
 ];
 
 const places = [
-  { name: "Theresienwiese", type: "Oktoberfest", lat: 48.1316, lng: 11.5499, text: "Épicentre de la Wiesn. Point de ralliement officiel." },
+  // QG / repères principaux
+  {
+    name: "QG — A&O München Laim",
+    type: "QG",
+    lat: 48.14417,
+    lng: 11.49490,
+    address: "Landsberger Straße 338, 80687 München",
+    text: "Votre point de chute à Laim. Retour hôtel et point de référence de la mission.",
+    website: "https://www.aohostels.com/fr/munich/muenchen-laim/",
+    verified: "23/09/2026"
+  },
+  { name: "Theresienwiese", type: "Oktoberfest", lat: 48.1316, lng: 11.5499, address: "Theresienwiese, München", text: "Épicentre de la Wiesn. Point de ralliement officiel." },
   { name: "Marienplatz", type: "Photo", lat: 48.1374, lng: 11.5755, text: "Place mythique, idéale pour lancer la mission Munich." },
   { name: "Hofbräuhaus München", type: "Bière", lat: 48.1376, lng: 11.5799, text: "Institution bavaroise. À tester tôt, avant surcharge du système." },
   { name: "Englischer Garten", type: "Secret", lat: 48.1642, lng: 11.6055, text: "Grand parc, surf urbain sur l’Eisbach et récupération stratégique." },
@@ -22,7 +33,208 @@ const places = [
   { name: "Augustiner-Keller", type: "Bière", lat: 48.1432, lng: 11.5537, text: "Biergarten historique, excellent plan de préchauffage." },
   { name: "Asamkirche", type: "Secret", lat: 48.1351, lng: 11.5698, text: "Petite église baroque impressionnante, spot discret et magnifique." },
   { name: "Eisbachwelle", type: "Secret", lat: 48.1436, lng: 11.5873, text: "Le spot de surf urbain improbable. Parfait pour une pause photo." },
-  { name: "Olympiapark", type: "Photo", lat: 48.1733, lng: 11.5464, text: "Vue large sur Munich, ambiance rétro-futuriste." }
+  { name: "Olympiapark", type: "Photo", lat: 48.1733, lng: 11.5464, text: "Vue large sur Munich, ambiance rétro-futuriste." },
+
+  // FKK CLUBS 18+ — établissements adultes, séparés du naturisme public
+  {
+    name: "FKK Fantasy",
+    type: "FKK Club 18+",
+    lat: 48.1420186,
+    lng: 11.5149828,
+    address: "Landsberger Str. 216, 80687 München-Laim",
+    text: "Sauna-club 18+ à Laim, sur la même avenue que le QG. Très proche de l'hôtel.",
+    rating: 4.8,
+    reviews: 30,
+    adult: true,
+    website: "https://fkk-club-muenchen.de/",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Sunshine",
+    type: "FKK Club 18+",
+    lat: 48.1309,
+    lng: 11.5208,
+    address: "Ludwigshafener Str. 1, 80686 München",
+    text: "Sauna-club 18+ très bien évalué, avec espace wellness.",
+    rating: 4.9,
+    reviews: 143,
+    adult: true,
+    website: "https://www.fkk-sunshine.de/",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Club Atlantis Munich",
+    type: "FKK Club 18+",
+    lat: 48.134279,
+    lng: 11.670479,
+    address: "Stahlgruberring 40, 81829 München",
+    text: "Sauna-club 18+ côté Trudering-Riem, près de la Messe.",
+    rating: 4.8,
+    reviews: 88,
+    adult: true,
+    website: "https://atlantis-munich.de/",
+    verified: "23/09/2026"
+  },
+
+  // NATURISME PUBLIC — zones officiellement autorisées par la ville de Munich
+  {
+    name: "FKK Maria Einsiedel — Isar",
+    type: "FKK Naturisme",
+    lat: 48.087841,
+    lng: 11.546147,
+    address: "Secteur Maria Einsiedel, Isar sud",
+    text: "Zone publique officielle de naturisme sur la rive ouest de l'Isar. Respecter les limites indiquées sur place.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Brudermühlbrücke",
+    type: "FKK Naturisme",
+    lat: 48.115628,
+    lng: 11.560188,
+    address: "Brudermühlbrücke, 81379 München",
+    text: "Zone publique officielle de naturisme sur l'Isar, entre la Braunauer Eisenbahnbrücke et la Brudermühlbrücke.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Isarinsel Oberföhring",
+    type: "FKK Naturisme",
+    lat: 48.181395,
+    lng: 11.628157,
+    address: "Isarinsel Oberföhring, München",
+    text: "Zone publique officielle de naturisme sur la rive est de l'Isarinsel Oberföhring.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Schönfeldwiese",
+    type: "FKK Naturisme",
+    lat: 48.14746,
+    lng: 11.58638,
+    address: "Englischer Garten — Schönfeldwiese",
+    text: "Zone officielle de naturisme dans le sud de l'Englischer Garten, derrière la Haus der Kunst.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Schwabinger Bucht",
+    type: "FKK Naturisme",
+    lat: 48.18131,
+    lng: 11.61584,
+    address: "Englischer Garten — Schwabinger Bucht",
+    text: "Zone officielle de naturisme dans le nord de l'Englischer Garten.",
+    rating: 4.6,
+    reviews: 37,
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Flauchersteg",
+    type: "FKK Naturisme",
+    lat: 48.105989,
+    lng: 11.554010,
+    address: "Flauchersteg, 81379 München",
+    text: "Grande grève de galets à l'est du Flauchersteg, officiellement autorisée au naturisme.",
+    rating: 4.6,
+    reviews: 131,
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "FKK Feldmochinger See",
+    type: "FKK Naturisme",
+    lat: 48.211719,
+    lng: 11.510986,
+    address: "Feldmochinger See — rive sud-ouest, 80995 München",
+    text: "Plage FKK officiellement délimitée au sud-ouest du lac.",
+    website: "https://stadt.muenchen.de/service/info/feldmochinger-see/10313227/",
+    verified: "23/09/2026"
+  },
+
+  // M-BÄDER — zones FKK officielles dans des piscines municipales
+  {
+    name: "Dantebad — zone FKK",
+    type: "FKK Bains",
+    lat: 48.167097,
+    lng: 11.532008,
+    address: "Postillonstraße 17, 80637 München",
+    text: "Piscine municipale avec zone FKK et bassin de 25 m dédié.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "Naturbad Maria Einsiedel — zones FKK",
+    type: "FKK Bains",
+    lat: 48.09652,
+    lng: 11.54560,
+    address: "Zentralländstraße 28, 81379 München",
+    text: "Naturbad municipal avec zone FKK mixte et zone FKK femmes.",
+    rating: 4.6,
+    reviews: 1537,
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "Ungererbad — zones FKK",
+    type: "FKK Bains",
+    lat: 48.17020,
+    lng: 11.59194,
+    address: "Traubestraße 3, 80805 München",
+    text: "Freibad municipal avec zone FKK mixte et zone FKK femmes.",
+    rating: 4.4,
+    reviews: 1376,
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+  {
+    name: "Freibad West — zones FKK",
+    type: "FKK Bains",
+    lat: 48.13903,
+    lng: 11.47367,
+    address: "Weinbergerstraße 11, 81241 München",
+    text: "Freibad municipal avec zones FKK dédiées. Ouverture saisonnière.",
+    website: "https://www.swm.de/baeder/freibaeder-muenchen/westbad-freibad",
+    verified: "23/09/2026"
+  },
+  {
+    name: "Cosimawellenbad — zone FKK",
+    type: "FKK Bains",
+    lat: 48.15479,
+    lng: 11.62896,
+    address: "Cosimastraße 5, 81925 München",
+    text: "Piscine municipale avec pelouse FKK pendant la saison estivale.",
+    website: "https://stadt.muenchen.de/infos/fkk.html",
+    verified: "23/09/2026"
+  },
+
+  // NIGHTLIFE 18+ — sélection très bien notée
+  {
+    name: "Queens Tabledance & Nightclub",
+    type: "Nightlife 18+",
+    lat: 48.13869,
+    lng: 11.55889,
+    address: "Goethestraße 3, 80336 München",
+    text: "Tabledance / nightclub 18+ près de la Hauptbahnhof, très bien noté.",
+    rating: 4.9,
+    reviews: 650,
+    adult: true,
+    website: "https://queenstabledance.com/",
+    verified: "23/09/2026"
+  },
+  {
+    name: "Femina Tabledance Club",
+    type: "Nightlife 18+",
+    lat: 48.13702,
+    lng: 11.56119,
+    address: "Schillerstraße 19, 80336 München",
+    text: "Tabledance / nightclub 18+ proche de la gare centrale, également très bien évalué.",
+    rating: 4.9,
+    reviews: 321,
+    adult: true,
+    website: "https://femina-tabledance.de/",
+    verified: "23/09/2026"
+  }
 ];
 
 const phrases = [
@@ -129,6 +341,63 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 }
 
+const PLACE_COLORS = {
+  "QG": "#2de2e6",
+  "Oktoberfest": "#ffb000",
+  "Bière": "#ffb000",
+  "Food": "#c9ff00",
+  "Photo": "#6c63ff",
+  "Secret": "#b7adc9",
+  "FKK Club 18+": "#ff2d95",
+  "FKK Naturisme": "#35ff69",
+  "FKK Bains": "#00d084",
+  "Nightlife 18+": "#ff3131"
+};
+
+function safeExternalUrl(value) {
+  if (!value) return "";
+  try {
+    const url = new URL(value, window.location.href);
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function routeUrl(place) {
+  const destination = `${place.lat},${place.lng}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+}
+
+function osmUrl(place) {
+  return `https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=17/${place.lat}/${place.lng}`;
+}
+
+function placeRatingHtml(place) {
+  if (!Number.isFinite(place.rating)) return "";
+  const reviews = Number.isFinite(place.reviews) ? ` · ${place.reviews} avis` : "";
+  return `<span class="rating-badge">★ ${place.rating.toFixed(1)}/5${reviews}</span>`;
+}
+
+function placeAdultHtml(place) {
+  return place.adult ? `<span class="adult-badge">🔞 18+</span>` : "";
+}
+
+function placeActionsHtml(place) {
+  const website = safeExternalUrl(place.website);
+  const siteButton = website
+    ? `<a class="place-link" href="${escapeHtml(website)}" target="_blank" rel="noopener noreferrer">🌐 Site / infos</a>`
+    : "";
+
+  return `
+    <div class="place-actions">
+      <a class="place-link primary" href="${escapeHtml(routeUrl(place))}" target="_blank" rel="noopener noreferrer">🧭 Itinéraire</a>
+      <a class="place-link" href="${escapeHtml(osmUrl(place))}" target="_blank" rel="noopener noreferrer">🗺 OSM</a>
+      ${siteButton}
+    </div>`;
+}
+
+
 function renderSquad() {
   squadGrid.innerHTML = squad.map(member => `
     <article class="squad-card" style="--color:${member.color}">
@@ -165,11 +434,23 @@ function renderPhrases(filter = "") {
 
 function renderPlaces(filter = "Tous") {
   const filtered = filter === "Tous" ? places : places.filter(place => place.type === filter);
+
   placeGrid.innerHTML = filtered.map(place => `
-    <article class="place-card">
-      <h3>${escapeHtml(place.name)}</h3>
+    <article class="place-card ${place.adult ? "adult-place" : ""}">
+      <div class="place-card-head">
+        <div>
+          <h3>${escapeHtml(place.name)}</h3>
+          <span class="tag">${escapeHtml(place.type)}</span>
+        </div>
+        <div class="place-badges">
+          ${placeAdultHtml(place)}
+          ${placeRatingHtml(place)}
+        </div>
+      </div>
+      ${place.address ? `<p class="place-address">📍 ${escapeHtml(place.address)}</p>` : ""}
       <p>${escapeHtml(place.text)}</p>
-      <span class="tag">${escapeHtml(place.type)}</span>
+      ${place.verified ? `<p class="place-verified">Vérifié le ${escapeHtml(place.verified)} · les notes peuvent évoluer.</p>` : ""}
+      ${placeActionsHtml(place)}
     </article>
   `).join("");
 }
@@ -209,11 +490,32 @@ function initMap() {
   }).addTo(map);
 
   const bounds = [];
+
   places.forEach(place => {
     bounds.push([place.lat, place.lng]);
-    L.marker([place.lat, place.lng])
+
+    const color = PLACE_COLORS[place.type] || "#ffb000";
+    const markerIcon = L.divIcon({
+      className: "custom-place-icon",
+      html: `<span class="map-marker" style="--marker-color:${color}" aria-hidden="true"></span>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -12]
+    });
+
+    const popup = `
+      <div class="map-popup">
+        <strong>${escapeHtml(place.name)}</strong>
+        <span class="map-popup-type">${escapeHtml(place.type)}</span>
+        <div class="map-popup-badges">${placeAdultHtml(place)} ${placeRatingHtml(place)}</div>
+        ${place.address ? `<p>📍 ${escapeHtml(place.address)}</p>` : ""}
+        <p>${escapeHtml(place.text)}</p>
+        ${placeActionsHtml(place)}
+      </div>`;
+
+    L.marker([place.lat, place.lng], { icon: markerIcon })
       .addTo(map)
-      .bindPopup(`<strong>${escapeHtml(place.name)}</strong><br>${escapeHtml(place.text)}<br><em>${escapeHtml(place.type)}</em>`);
+      .bindPopup(popup, { maxWidth: 320 });
   });
 
   map.fitBounds(bounds, { padding: [34, 34] });
@@ -221,8 +523,11 @@ function initMap() {
   window.addEventListener("resize", () => map.invalidateSize());
 
   mapList.innerHTML = places.map(place => `
-    <li><strong>${escapeHtml(place.name)}</strong> — ${escapeHtml(place.type)}<br>
-      <a href="https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=16/${place.lat}/${place.lng}" target="_blank" rel="noopener noreferrer">Ouvrir dans OpenStreetMap</a>
+    <li>
+      <strong>${escapeHtml(place.name)}</strong> — ${escapeHtml(place.type)}
+      ${Number.isFinite(place.rating) ? `<br>★ ${place.rating.toFixed(1)}/5${Number.isFinite(place.reviews) ? ` · ${place.reviews} avis` : ""}` : ""}
+      ${place.address ? `<br><span>${escapeHtml(place.address)}</span>` : ""}
+      <br><a href="${escapeHtml(routeUrl(place))}" target="_blank" rel="noopener noreferrer">Itinéraire</a>
     </li>
   `).join("");
 }
@@ -1010,23 +1315,48 @@ function initSuicidSquadOps() {
             }
         ],
 
-        "❤️ Drague": [
-            {
-                de: "Darf ich dir etwas zu trinken anbieten?",
-                fr: "Je peux t'offrir un verre ?",
-                audio: "assets/audio/drague-01.mp3"
-            },
-            {
-                de: "Wie heißt du?",
-                fr: "Comment t'appelles-tu ?",
-                audio: "assets/audio/drague-02.mp3"
-            },
-            {
-                de: "Du bist sehr sympathisch.",
-                fr: "Tu es très sympathique.",
-                audio: "assets/audio/drague-03.mp3"
-            }
-        ],
+       "❤️ Drague": [
+    {
+        de: "Darf ich dir etwas zu trinken anbieten?",
+        fr: "Je peux t'offrir un verre ?",
+        audio: "assets/audio/drague-01.mp3"
+    },
+    {
+        de: "Wie heißt du?",
+        fr: "Comment t'appelles-tu ?",
+        audio: "assets/audio/drague-02.mp3"
+    },
+    {
+        de: "Du bist sehr sympathisch.",
+        fr: "Tu es très sympathique.",
+        audio: "assets/audio/drague-03.mp3"
+    },
+    {
+        de: "Darf ich dir ein Bier ausgeben?",
+        fr: "Je peux t'offrir une bière ?",
+        audio: "assets/audio/drague-04.mp3"
+    },
+    {
+        de: "Du hast ein schönes Lächeln.",
+        fr: "Tu as un joli sourire.",
+        audio: "assets/audio/drague-05.mp3"
+    },
+    {
+        de: "Bist du auch wegen des Oktoberfests hier?",
+        fr: "Toi aussi, tu es ici pour l'Oktoberfest ?",
+        audio: "assets/audio/drague-06.mp3"
+    },
+    {
+        de: "Möchtest du mit uns anstoßen?",
+        fr: "Tu veux trinquer avec nous ?",
+        audio: "assets/audio/drague-07.mp3"
+    },
+    {
+        de: "Ich spreche nicht gut Deutsch, aber ich kann gut feiern.",
+        fr: "Je ne parle pas bien allemand, mais je sais bien faire la fête.",
+        audio: "assets/audio/drague-08.mp3"
+    }
+],
 
         "🚨 Urgence": [
             {

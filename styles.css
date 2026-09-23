@@ -2013,3 +2013,195 @@ main,
     grid-template-columns: 1fr;
   }
 }
+/* =========================================================
+   SQUAD DE ZANO — SECTION REPLIABLE
+   ========================================================= */
+
+.squad-section {
+    padding: 0;
+    overflow: hidden;
+}
+
+
+/* DETAILS */
+
+.squad-details {
+    width: 100%;
+}
+
+
+/* Suppression du triangle natif */
+
+.squad-summary {
+    list-style: none;
+}
+
+.squad-summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* =========================================================
+   EN-TETE CLIQUABLE
+   ========================================================= */
+
+.squad-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: clamp(1.2rem, 2vw, 2rem);
+
+    cursor: pointer;
+    user-select: none;
+
+    transition:
+        background 180ms ease,
+        color 180ms ease;
+}
+
+
+.squad-summary:hover {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(201, 255, 0, 0.06),
+            rgba(255, 45, 149, 0.05)
+        );
+}
+
+
+/* TITRE */
+
+.squad-summary-title {
+    min-width: 0;
+}
+
+
+.squad-summary-title .eyebrow {
+    margin-top: 0;
+    margin-bottom: 7px;
+}
+
+
+.squad-summary-title h2 {
+    margin: 0;
+
+    font-size: clamp(2rem, 4vw, 4rem);
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   BOUTON + / -
+   ========================================================= */
+
+.squad-toggle-icon {
+    flex: 0 0 auto;
+
+    display: grid;
+    place-items: center;
+
+    width: 52px;
+    height: 52px;
+
+    color: #111;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--acid),
+            var(--beer)
+        );
+
+    border-radius: 50%;
+
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+
+    box-shadow:
+        5px 5px 0 var(--pink);
+
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+}
+
+
+/* Quand la Squad est ouverte */
+
+.squad-details[open]
+.squad-toggle-icon {
+    transform: rotate(45deg);
+
+    box-shadow:
+        3px 3px 0 var(--pink);
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+.squad-content {
+    padding:
+        0
+        clamp(1.2rem, 2vw, 2rem)
+        clamp(1.2rem, 2vw, 2rem);
+}
+
+
+.squad-helper {
+    margin:
+        0
+        0
+        18px;
+
+    color: var(--muted);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .squad-summary {
+        padding: 1rem;
+    }
+
+
+    .squad-summary-title h2 {
+        font-size: clamp(
+            1.6rem,
+            9vw,
+            2.4rem
+        );
+    }
+
+
+    .squad-toggle-icon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 1.7rem;
+
+        box-shadow:
+            4px 4px 0 var(--pink);
+    }
+
+
+    .squad-content {
+        padding:
+            0
+            1rem
+            1rem;
+    }
+
+}
